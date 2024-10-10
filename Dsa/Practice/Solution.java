@@ -1,87 +1,3 @@
-// package Practice;
-
-// /**
-//  * Node
-//  */
-// class Node {
-//     int data;
-//     Node next;
-
-//     Node(int data, Node next){
-//         this.data = data;
-//         this.next = next;
-//     }
-
-//     Node(int data){
-//         this.data = data;
-//         this.next = null;
-//     }
-// }
-// public class Solution {
-
-//     private static Node convertArrtoLL(int[] arr){
-//         Node head = new Node(arr[0]);
-//         Node mover = head;
-
-//         for (int i = 1; i < arr.length; i++) {
-//             Node temp = new Node(arr[i]);
-//             mover.next = temp;
-//             mover = temp;
-//         }
-//         return head;
-//     }
-
-//     private static void arrIteration(Node head){
-//         Node temp = head;
-//         while (temp != null) {
-//             System.out.println("iter " + temp.data);
-//             temp = temp.next;
-//         }
-//     }
-
-//     private static int length(Node head){
-//         Node temp = head;
-//         int cnt = 0;
-//         while (temp != null) {
-//             cnt++;
-//             temp = temp.next;
-//         }
-
-//         return cnt;
-//     }
-
-//     private static int search(Node head, int val){
-//         Node temp = head;
-//         while (temp != null) {
-//             if(temp.data == val) return 1;
-//             temp = temp.next;
-//         }
-
-//         return 0;
-//     }
-
-
-//     public static void main(String[] args) {
-//         Node head = new Node(6);
-//         // single value
-//         // System.out.println("head "+ head.data);
-
-//         int[] arr = {4,6,1,8};
-//         Node arrHead = convertArrtoLL(arr);
-
-//         // System.out.println("arrHead " + arrHead.data);
-
-//         arrIteration(arrHead);
-
-//         //search
-//         System.out.println("length - > "+ length(arrHead));
-//         System.out.println("find - > "+ search(arrHead, 4));
-//     }
-    
-// }
-
-
-
 package Practice;
 
 class Node{
@@ -185,8 +101,6 @@ public class Solution {
         
         int cnt = 0;
 
-
-
         while (temp != null) {
             cnt ++;
             if (k == 1 && cnt == 1) {
@@ -202,28 +116,73 @@ public class Solution {
         return head;
     }
 
+    //------------------------------------------------------------------------
 
+    // Insertion
+
+
+    //insert in head
     public static Node insertHead(Node head, int val){
         if (head == null)  return head;
 
+        return new Node(val, head);
+    }
+    
+    // insert in tail
+
+
+    public static Node insertTail(Node head, int val){
+        if (head == null) return null;
+
         Node temp = head;
-        Node prev = new Node(val);
-        head = prev;
-        head.next = temp;
-        // while (temp != null) {
-        //     prev = prev.next;
-        // }
+
+        while(temp.next != null) {
+            temp = temp.next;
+        }
+
+        Node newnode = new Node(val);
+        temp.next = newnode;
 
         return head;
     }
+
+    // Insert at position
+
+    public static Node insertatany(Node head, int val, int k) {
+        if (head == null) {
+            return new Node(val);
+        }
+
+        if (k == 1) {
+            return new Node(val, head);
+        }
+
+        int cnt = 0;
+        Node temp = head;
+
+        while (temp != null) {
+            cnt++;
+            if (cnt == k-1) {
+                Node x = new Node(val, temp.next);
+                temp.next = x;
+                break;
+            }
+            temp = temp.next;
+        }
+
+        return head;
+    }
+
+    //-------------------------------------------------------------------
+
 
     public static void main(String[] args) {
         
         int[] arr = {3,5,1,7,2};
 
         Node head = conver(arr);
-        head = insertHead(head, 0);
-        head = anyvalue(head, 5);
+        head = insertatany(head, 0, 4);
+        // head = anyvalue(head, 5);
         Node temp = head;
 
         while (temp != null) {
