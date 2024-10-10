@@ -156,6 +156,7 @@ public class Solution {
         if (k == 1) {
             return new Node(val, head);
         }
+        System.out.println("head");
 
         int cnt = 0;
         Node temp = head;
